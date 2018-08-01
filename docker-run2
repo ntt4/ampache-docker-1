@@ -1,5 +1,5 @@
 docker run --name=ampache -e TIMEZONE="Europe/Amsterdam" -d \
 -v /home/tip-user/stack/music:/media:ro \
--v /home/tip-user/ampache-mysql-data:/var/lib/mysql \
+-v /home/tip-user/ampache-mysql-data:/var/lib/mysql/data \
 --expose 10080 \
 ampache
