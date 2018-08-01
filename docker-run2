@@ -1,6 +1,10 @@
-docker run --name=ampache -e TIMEZONE="Europe/Amsterdam" -d \
--v /home/tip-user/stack/music:/media:ro \
--v /home/tip-user/ampache-mysql-data:/var/lib/mysql/data \
---expose 10080 \
-ampache
-
+docker run -d -e VIRTUAL_HOST=www.hoho.eu.org,hoho.eu.org \
+              -e LETSENCRYPT_HOST=www.hoho.eu.org,hoho.eu.org \
+              -e LETSENCRYPT_EMAIL=admin@domain.com \
+              --expose 10080 \
+              --restart=on-failure:10 \
+              --network=webproxy \
+              --name=ampache -e TIMEZONE="Europe/Amsterdam" -d \
+              -v /home/tip-user/stack/music:/media:ro \
+              -v /home/tip-user/ampache-mysql-data:/var/lib/mysql/data \
+              ampache
