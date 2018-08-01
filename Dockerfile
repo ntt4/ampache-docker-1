@@ -1,7 +1,7 @@
-FROM alpine:3.6
-MAINTAINER Ingmar Delsink https://github.com/idelsink
-LABEL version="2.0.0" \
-      description="Ampache docker image with Linux Alpine"
+FROM alpine:3.8
+# MAINTAINER Ingmar Delsink https://github.com/idelsink
+# LABEL version="2.0.0" \
+    #   description="Ampache docker image with Linux Alpine"
 
 # General
 ENV TIMEZONE=""
@@ -13,7 +13,10 @@ ENV APACHE_WEB_ROOT=/var/www/localhost \
     APACHE_GROUP=www-data
 
 # Ampache
-ENV AMPACHE_VER=3.8.3 \
+# ENV AMPACHE_VER=3.8.3 \
+    # AMPACHE_WEB_DIR=${APACHE_WEB_ROOT}/ampache
+
+ENV AMPACHE_VER=master \
     AMPACHE_WEB_DIR=${APACHE_WEB_ROOT}/ampache
 
 # MySQL
@@ -25,7 +28,7 @@ ENV MYSQL_DATA_DIR=/var/lib/mysql \
     MYSQL_GROUP=mysql
 
 # update, upgrade and install:
-RUN apk --no-cache update && \
+RUN apk update && apk upgrade && \
     apk add --no-cache \
         apache2 \
         apache2-utils \
@@ -61,7 +64,8 @@ RUN apk --no-cache update && \
 WORKDIR /
 
 ADD root \
-    https://github.com/ampache/ampache/archive/${AMPACHE_VER}.tar.gz \
+    https://github.com/ampache/ampache/archive/master.tar.gz \
+    # https://github.com/ampache/ampache/archive/${AMPACHE_VER}.tar.gz \
     # ampache-${AMPACHE_VER}.tar.gz \
     /
 
@@ -71,6 +75,7 @@ RUN /scripts/configure.sh
 #   443: https (for future setup)
 #  9001: supervisord web
 # 32400: plex
-EXPOSE 80 443 9001 32400
+# EXPOSE 80 443 9001 32400
+EXPOSE 80 9001 32400
 
 ENTRYPOINT [ "/scripts/entrypoint.sh" ]
