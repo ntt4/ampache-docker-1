@@ -76,6 +76,7 @@ RUN /scripts/configure.sh
 #  9001: supervisord web
 # 32400: plex
 # EXPOSE 80 443 9001 32400
-EXPOSE 80 9001 32400
+# EXPOSE 80 9001 32400
+EXPOSE 10080
 
 ENTRYPOINT [ "/scripts/entrypoint.sh" ]
