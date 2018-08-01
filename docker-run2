@@ -3,3 +3,4 @@ docker run --name=ampache -e TIMEZONE="Europe/Amsterdam" -d \
 -v /home/tip-user/ampache-mysql-data:/var/lib/mysql \
 --expose 10080 \
 ampache
+
