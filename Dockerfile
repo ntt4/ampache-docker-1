@@ -68,7 +68,7 @@ ADD root \
     https://github.com/ampache/ampache/archive/master.tar.gz \
     # https://github.com/ampache/ampache/archive/${AMPACHE_VER}.tar.gz \
     # ampache-${AMPACHE_VER}.tar.gz \
-    && rm master.tar.gz \
+    && rm /master.tar.gz \
     /
 
 RUN /scripts/configure.sh
