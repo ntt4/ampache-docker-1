@@ -44,6 +44,7 @@ RUN apk update && apk upgrade && \
         php7-dom \
         php7-gd \
         php7-gettext \
+        php7-mbstring \
         php7-iconv \
         php7-json \
         php7-openssl \
@@ -67,6 +68,7 @@ ADD root \
     https://github.com/ampache/ampache/archive/master.tar.gz \
     # https://github.com/ampache/ampache/archive/${AMPACHE_VER}.tar.gz \
     # ampache-${AMPACHE_VER}.tar.gz \
+    && rm master.tar.gz \
     /
 
 RUN /scripts/configure.sh
