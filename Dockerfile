@@ -67,11 +67,10 @@ WORKDIR /
 ADD root \
     https://github.com/ampache/ampache/archive/master.tar.gz \
     # https://github.com/ampache/ampache/archive/${AMPACHE_VER}.tar.gz \
-    # ampache-${AMPACHE_VER}.tar.gz \
-    && rm /master.tar.gz \
+    # ampache-${AMPACHE_VER}.tar.gz \ 
     /
 
-RUN /scripts/configure.sh
+RUN rm -v master.tar.gz && /scripts/configure.sh
 
 #    80: http
 #   443: https (for future setup)
