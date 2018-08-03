@@ -70,8 +70,8 @@ ADD root \
     # ampache-${AMPACHE_VER}.tar.gz \ 
     /
 
-RUN rm -v master.tar.gz && /scripts/configure.sh
-
+# RUN rm -v master.tar.gz && /scripts/configure.sh
+RUN /scripts/configure.sh
 #    80: http
 #   443: https (for future setup)
 #  9001: supervisord web
