@@ -1,0 +1,38 @@
+<?xml version="1.0" standalone='no'?>
+<!DOCTYPE service-group SYSTEM "avahi-service.dtd">
+<service-group>
+ <name>Ampache DAAP protocol</name>
+
+ <service>
+   <type>_http._tcp</type>
+   <port>3689</port>
+ </service>
+
+ <service>
+   <type>_daap._tcp</type>
+   <port>3689</port>
+   <txt-record>txtvers=1 iTShVersion=131073 Version=196610</txt-record>
+ </service>
+
+ <service>
+   <type>_dacp._tcp</type>
+   <port>3689</port>
+ </service>
+
+ <service>
+   <type>_touch-able._tcp</type>
+   <port>3689</port>
+   <txt-record>txtvers=1</txt-record>
+   <txt-record>OSsi=0x10313</txt-record>
+   <txt-record>CtlN=Ampache</txt-record>
+   <txt-record>Ver=131073</txt-record>
+   <txt-record>DvSv=2305</txt-record>
+   <txt-record>DvTy=iTunes</txt-record>
+   <txt-record>DbId=416D7061636865</txt-record>
+ </service>
+ 
+ <service>
+   <type>_rsp._tcp</type>
+   <port>3689</port>
+ </service>
+</service-group>
