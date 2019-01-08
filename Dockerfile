@@ -58,11 +58,9 @@ RUN apk --no-cache update && \
         pwgen \
         supervisor \
         tzdata \
-        wget
-        
-RUN wget && \
-    wget -O /${AMPACHE_VER}.zip https://github.com/ampache/ampache/archive/${AMPACHE_VER}.zip && \
-    ln /usr/bin/php7 /usr/bin/php
+        wget && \
+        wget -O /${AMPACHE_VER}.zip https://github.com/ampache/ampache/archive/${AMPACHE_VER}.zip && \
+        ln /usr/bin/php7 /usr/bin/php
     
 WORKDIR /
 
