@@ -66,10 +66,7 @@ RUN wget && \
     
 WORKDIR /
 
-ADD root \
-    https://github.com/ampache/ampache/archive/${AMPACHE_VER}.zip
-    # ampache-${AMPACHE_VER}.zip \
-    /
+ADD root /
 
 RUN /scripts/configure.sh
 
