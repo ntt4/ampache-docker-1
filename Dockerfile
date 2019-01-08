@@ -1,7 +1,14 @@
-FROM alpine:3.4
-MAINTAINER Ingmar Delsink https://github.com/idelsink
-label version="2.0.0" \
-      description="Ampache docker image with Linux Alpine"
+FROM alpine:3.8
+
+MAINTAINER Tavis Booth https://github.com/ntt4
+label version="4.0.0" \
+      description="Ampache docker image built from Alpine Linux 3.8 with PHP 7.3"
+
+# Add Codecasts PHP repo (Change versions below as above FROM)
+ADD https://php.codecasts.rocks/php-alpine.rsa.pub /etc/apk/keys/php-alpine.rsa.pub
+RUN apk --update add ca-certificates
+RUN echo "@php https://php.codecasts.rocks/v3.8/php-7.3" >> /etc/apk/repositories
+
 
 # Apache
 ENV APACHE_WEB_ROOT=/var/www/localhost \
@@ -10,7 +17,7 @@ ENV APACHE_WEB_ROOT=/var/www/localhost \
     APACHE_GROUP=www-data
 
 # Ampache
-ENV AMPACHE_VER=3.8.3 \
+ENV AMPACHE_VER=master \
     AMPACHE_WEB_DIR=${APACHE_WEB_ROOT}/ampache
 
 # MySQL
@@ -31,30 +38,36 @@ RUN apk --no-cache update && \
         git \
         mysql \
         mysql-client \
-        php5 \
-        php5-apache2 \
-        php5-curl \
-        php5-dom \
-        php5-gd \
-        php5-gettext \
-        php5-iconv \
-        php5-json \
-        php5-openssl \
-        php5-pdo \
-        php5-pdo_mysql \
-        php5-phar \
-        php5-sockets \
-        php5-xml \
-        php5-xmlreader \
-        php5-zlib \
+        php-common@php \
+        php-apache2@php \
+        php-curl@php \
+        php-dom@php \
+        php-gd@php \
+        php-gettext@php \
+        php-iconv@php \
+        php-json@php \
+        php-openssl@php \
+        php-pdo@php \
+        php-pdo_mysql@php \
+        php-phar@php \
+        php-session@php \
+        php-sockets@php \
+        php-xml@php \
+        php-xmlreader@php \
+        php-zlib@php \
         pwgen \
         supervisor \
+        tzdata \
         wget
-
+        
+RUN wget && \
+    wget -O /${AMPACHE_VER}.zip https://github.com/ampache/ampache/archive/${AMPACHE_VER}.zip && \
+    ln /usr/bin/php7 /usr/bin/php
+    
 WORKDIR /
 
 ADD root \
-    https://github.com/ampache/ampache/archive/${AMPACHE_VER}.zip \
+    https://github.com/ampache/ampache/archive/${AMPACHE_VER}.zip
     # ampache-${AMPACHE_VER}.zip \
     /
 
